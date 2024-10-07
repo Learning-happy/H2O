@@ -2,7 +2,8 @@
 Usage:
 python3 -m flexgen.flex_opt --model facebook/opt-1.3b --gpu-batch-size 32 --percent 100 0 100 0 100 0
 """
-
+import warnings
+warnings.filterwarnings('ignore')
 import argparse
 import dataclasses
 import os
@@ -16,13 +17,13 @@ from tqdm import tqdm
 import torch
 from transformers import AutoTokenizer
 
-from flexgen.compression import CompressionConfig
-from flexgen.opt_config import OptConfig, get_opt_config, download_opt_weights
-from flexgen.pytorch_backend import (TorchDevice, TorchDisk, TorchLink,
+from compression import CompressionConfig
+from opt_config import OptConfig, get_opt_config, download_opt_weights
+from pytorch_backend import (TorchDevice, TorchDisk, TorchLink,
     TorchMixedDevice, DeviceType, general_copy, fix_recursive_import,
     cache_replace, acc_replace)
-from flexgen.timer import timers
-from flexgen.utils import (Task, ExecutionEnv, GB, T, ValueHolder,
+from timer import timers
+from utils import (Task, ExecutionEnv, GB, T, ValueHolder,
     array_1d, array_2d, array_3d, str2bool, project_decode_latency,
     torch_mem_stats, torch_dtype_to_np_dtype, print_cpu_mem_usage,
     write_benchmark_log, read_benchmark_log)
