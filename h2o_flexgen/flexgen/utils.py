@@ -262,13 +262,13 @@ def project_decode_latency(costs, prompt_len, gen_len):
 
 
 def print_cpu_mem_usage(message = None):
-    vir_mem = psutil.virtual_memory()
+    vir_mem = psutil.virtual_memory() # 获取虚拟内存信息
     if message:
         print(f"== {message} ==")
-    print(f"used: {vir_mem.used/GB:4.0f} GB, "
-          f"free: {vir_mem.free/GB:4.0f} GB, "
-          f"cached: {vir_mem.cached/GB:4.0f} GB, "
-          f"available: {vir_mem.available/GB:4.0f} GB")
+    print(f"used: {vir_mem.used/GB:4.0f} GB, " # 计算已用内存
+          f"free: {vir_mem.free/GB:4.0f} GB, " # 计算空闲内存
+          f"cached: {vir_mem.cached/GB:4.0f} GB, " # 计算缓存内存（缓存文件）
+          f"available: {vir_mem.available/GB:4.0f} GB") # 计算可用内存
     return vir_mem
 
 
@@ -287,9 +287,9 @@ def write_benchmark_log(filename, model_size, cache_size, hidden_size,
                f"decode throughput: {decode_throughput:.3f} token/s\n"
                f"total latency: {total_latency:.3f} s\t"
                f"total throughput: {total_throughput:.3f} token/s")
-    with open(filename, "a") as fout:
-        fout.write(log_str + "\n")
-
+    # with open(filename, "a") as fout:
+    #     fout.write(log_str + "\n")
+    
     return log_str
 
 
